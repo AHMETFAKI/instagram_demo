@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:instagram_demo/signuppage.dart';
 import 'main.dart';
 import 'loginpage.dart';
 import 'chatpage.dart';
@@ -24,6 +25,10 @@ final GoRouter goRoute = GoRouter(
     GoRoute(
       path: "/homepage",
       builder: (context, state) => MyHomePage(),
+    ),
+    GoRoute(
+      path: "/signuppage",
+      builder: (context, state) => SignUpPage(),
     )
   ]
 );

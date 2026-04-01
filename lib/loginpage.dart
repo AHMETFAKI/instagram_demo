@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                           Text("Hesabın yok mu?"),
                           TextButton(
                               onPressed: (){
-                                print("tıklandı");
+                                context.go("/signuppage");
                               },
                               child: Text(
                                 "Kayıt Ol!",
