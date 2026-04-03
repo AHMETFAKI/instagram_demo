@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
+
+import 'loginpage.dart';
+
 
 class ChatPage extends StatelessWidget {
   final String name;
@@ -13,7 +18,12 @@ class ChatPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey,
         centerTitle: true,
-        title: Text(name.isEmpty ? "Kullanıcı" : name),
+        title: Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child){
+              var username = ref.watch(ad);
+              return Text(name.isEmpty ? "Kullanıcı" : username);
+            },
+        ),
       ),
     );
   }

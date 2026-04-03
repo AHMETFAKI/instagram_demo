@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
+import 'package:instagram_demo/loginpage.dart';
 
 class ProfilePage extends StatelessWidget {
-  final String name;
-  const ProfilePage({super.key, required this.name});
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +13,12 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.grey,
         centerTitle: true,
-        title: Text(name.isEmpty ? "Profil Sayfası":name),
+        title: Consumer(
+            builder: (BuildContext context , WidgetRef ref, Widget? child){
+              var username = ref.watch(ad);
+              return Text(username.isEmpty ? "Profil Sayfası":username);
+            },
+        ),
       ),
 
       body: Column(

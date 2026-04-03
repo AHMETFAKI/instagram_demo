@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:go_router/go_router.dart';
-import 'homepage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+final ad = StateProvider<String>((ref){return "username";});
+
+
+class LoginPage extends ConsumerStatefulWidget {
+  LoginPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
 
   // 1. Formu kontrol etmek için bir anahtar (Key) oluşturuyoruz
   final _formKey = GlobalKey<FormState>();
+
 
   // 2. Metinleri hafızada tutacak kumandalarımız (Controller)
   final TextEditingController _emailController = TextEditingController();
@@ -152,6 +157,12 @@ class _LoginPageState extends State<LoginPage> {
                               print("Veritabanına gönderilecek Email: $email");
                               print("Veritabanına gönderilecek Şifre: $password");
 
+                              String extractedName= email.split("@").first;
+                              if (extractedName.trim().length<3){
+                                extractedName = "username";
+                              }
+                              ref.read(ad.notifier).state = extractedName;
+
                               context.go("/homepage");
                             }
                           },
@@ -168,7 +179,11 @@ class _LoginPageState extends State<LoginPage> {
                           Text("Hesabın yok mu?"),
                           TextButton(
                               onPressed: (){
-                                context.go("/signuppage");
+                                /*Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => SignUpPage())
+                                );*/
+                                context.push("/signuppage");
                               },
                               child: Text(
                                 "Kayıt Ol!",
@@ -180,7 +195,6 @@ class _LoginPageState extends State<LoginPage> {
                           )
                         ],
                       )
-                      
                     ],
                   ),
                 )

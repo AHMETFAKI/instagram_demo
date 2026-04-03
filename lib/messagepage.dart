@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'chatpage.dart';
 
 class MessageHome extends StatefulWidget {
@@ -9,6 +10,10 @@ class MessageHome extends StatefulWidget {
 }
 
 class _MessageHomeState extends State<MessageHome> {
+
+
+  Color _butonRengi = Colors.blue;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +32,7 @@ class _MessageHomeState extends State<MessageHome> {
 
                   ListTile(
                     onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChatPage(name: "ahmet"))
-                      );
+                      context.push("/chatpage");
                     },
                     leading: CircleAvatar(
                       radius: 16,
@@ -151,6 +153,28 @@ class _MessageHomeState extends State<MessageHome> {
                             ],
                           )
                       )
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: _butonRengi,
+                      padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        if(_butonRengi == Colors.blue){
+                          _butonRengi = Colors.red;
+                        }
+                        else{
+                          _butonRengi = Colors.blue;
+                        }
+                      });
+                    },
+                    child: Text(
+                      "bana tıkla"
+                    ),
                   ),
                 ],
               )

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
+
+import 'loginpage.dart';
 
 
 class MainPage extends StatelessWidget {
@@ -28,15 +31,20 @@ class MainPage extends StatelessWidget {
                           backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
                         ),
                         SizedBox(width: 20),
-                        Expanded(
-                          child: Text(
-                              "profil adı",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black
-                              )
-                          ),
+                        Consumer(
+                          builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                            var username = ref.watch(ad);
+                            return Expanded(
+                              child: Text(
+                                  username,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black
+                                  )
+                              ),
+                            );
+                          },
                         ),
                         IconButton(
                           onPressed: (){
@@ -141,15 +149,20 @@ class MainPage extends StatelessWidget {
                           backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
                         ),
                         SizedBox(width: 20),
-                        Expanded(
-                          child: Text(
-                              "profil adı",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black
-                              )
-                          ),
+                        Consumer(
+                          builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                            var username = ref.watch(ad);
+                            return Expanded(
+                              child: Text(
+                                  username,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black
+                                  )
+                              ),
+                            );
+                          },
                         ),
                         IconButton(
                           onPressed: (){
@@ -254,15 +267,20 @@ class MainPage extends StatelessWidget {
                           backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
                         ),
                         SizedBox(width: 20),
-                        Expanded(
-                          child: Text(
-                              "profil adı",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black
-                              )
-                          ),
+                        Consumer(
+                          builder: (BuildContext context, WidgetRef ref, Widget? child){
+                            var username = ref.watch(ad);
+                            return Expanded(
+                              child: Text(
+                                  username,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black
+                                  )
+                              ),
+                            );
+                          },
                         ),
                         IconButton(
                           onPressed: (){

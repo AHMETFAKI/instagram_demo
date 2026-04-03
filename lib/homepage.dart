@@ -1,52 +1,51 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/legacy.dart';
 import 'reelspage.dart';
 import 'messagepage.dart';
 import 'searchpage.dart';
 import 'profilepage.dart';
 import 'mainpage.dart';
 
+final bottomNavProvider = StateProvider<int>((ref) => 0);
 
-class MyHomePage extends StatefulWidget {
+
+class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-
-  int _currentIndex=0;
-
-  final List<Widget> _pages = [
-    const MainPage(title: "Ana Sayfa"),
-    const ReelsPage(
-      videoUrls: [
-        "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-        "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
-        "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
-      ],
-    ),
-    const MessageHome(),
-    const SearchPage(),
-    const ProfilePage(name: "adımşuşu"),
-  ];
 
   @override
-  Widget build(BuildContext context) {
+  Widget build (BuildContext context, WidgetRef ref){
+    var currentIndex = ref.watch(bottomNavProvider);
+
+    final List<Widget> _pages = [
+      const MainPage(title: "Ana Sayfa"),
+      const ReelsPage(
+        videoUrls: [
+          "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+          "https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4",
+          "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+        ],
+      ),
+      const MessageHome(),
+      const SearchPage(),
+      const ProfilePage(),
+    ];
+
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: _pages[currentIndex],
 
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        currentIndex: _currentIndex,
+        currentIndex: currentIndex,
         selectedItemColor: Colors.brown,
         unselectedItemColor: Colors.grey,
 
         onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          /*setState(() {
+              currentIndex = index;
+            })*/
+          ref.read(bottomNavProvider.notifier).state = index;
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Ana Sayfa"),
