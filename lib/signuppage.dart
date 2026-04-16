@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:instagram_demo/common_widgets/customtextfformfield.dart';
 
 class SignUpPage extends StatefulWidget {
 
@@ -9,6 +10,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+
 
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailcontroller = TextEditingController();
@@ -46,22 +49,17 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40.0),
-                    child: TextFormField(
-                      controller: _namecontroller,
-                      keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.person),
-                        labelText: "name",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                        )
-                      ),
-                      validator: (value){
-                        if(value == null || value.isEmpty){
-                          return "name boş bırakılamaz";
-                        }
-                        return null;
-                      },
+                    child: CustomTextFormField(
+                        controller: _namecontroller,
+                        keyboardType: TextInputType.name,
+                        obscureText: false, label: "Name",
+                        prefixicon: Icons.person,
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                            return "Surname boş bırakılamaz";
+                          }
+                          return null;
+                        },
                     ),
                   ),
 
@@ -69,16 +67,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextFormField(
+                    child: CustomTextFormField(
                       controller: _surnamecontroller,
                       keyboardType: TextInputType.name,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.person_2_outlined),
-                        labelText: "Surname",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                        )
-                      ),
+                      obscureText: false,
+                      label: "Surname",
+                      prefixicon: Icons.person,
                       validator: (value){
                         if(value == null || value.isEmpty){
                           return "Surname boş bırakılamaz";
@@ -92,16 +86,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextFormField(
+                    child: CustomTextFormField(
                       controller: _emailcontroller,
                       keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.email),
-                        labelText: "E-mail",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                        )
-                      ),
+                      obscureText: false,
+                      label: "E-mail",
+                      prefixicon: Icons.email,
                       validator: (value){
                         if(value == null || value.isEmpty){
                           return "E-mail boş bırakılamaz";
@@ -118,16 +108,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 40),
-                    child: TextFormField(
+                    child: CustomTextFormField(
                       controller: _passwordcontroller,
                       obscureText: true,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(Icons.password),
-                        labelText: "Password",
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10)
-                        ),
-                      ),
+                      label: "Password",
+                      prefixicon: Icons.lock,
+                      keyboardType: TextInputType.visiblePassword,
                       validator: (value){
                         if(value == null || value.isEmpty){
                           return "Şifre boş bırakılamaz";

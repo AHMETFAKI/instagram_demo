@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:instagram_demo/messagewidget/messagecard.dart';
 import 'chatpage.dart';
 
 class MessageHome extends StatefulWidget {
@@ -30,133 +31,33 @@ class _MessageHomeState extends State<MessageHome> {
               child: ListView(
                 children: [
 
-                  ListTile(
-                    onTap: (){
-                      context.push("/chatpage");
-                    },
-                    leading: CircleAvatar(
-                      radius: 16,
-                      backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
-                    ),
-                    title: Text("data",style: TextStyle(fontSize: 25),),
-                  ),
+                  MessageCard(),
 
                   SizedBox(
                     height: 20,
                   ),
 
-                  ListTile(
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChatPage(name: "ahmet"))
-                      );
-                    },
-                    leading: CircleAvatar(
-                      radius: 16,
-                      backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
-                    ),
-                    title: Text("data",style: TextStyle(fontSize: 25),),
-                  ),
+                  MessageCard(),
 
                   SizedBox(
                     height: 20,
                   ),
 
-                  ListTile(
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChatPage(name: "ahmet"))
-                      );
-                    },
-                    leading: CircleAvatar(
-                      radius: 16,
-                      backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
-                    ),
-                    title: Text("data",style: TextStyle(fontSize: 25),),
-                  ),
+                  MessageCard(),
 
                   SizedBox(
                     height: 20,
                   ),
 
-                  ListTile(
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChatPage(name: "ahmet"))
-                      );
-                    },
-                    leading: CircleAvatar(
-                      radius: 16,
-                      backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
-                    ),
-                    title: Text("data",style: TextStyle(fontSize: 25),),
-                  ),
-
+                  MessageCard(),
                   SizedBox(
                     height: 20,
                   ),
 
-                  ElevatedButton(
-                      onPressed: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ChatPage(name: "ahmet"))
-                        );
-                      },
-                      child: Container(
-                          height: 90,
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 16,
-                                backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text("data",style: TextStyle(fontSize: 25),)
-                            ],
-                          )
-                      )
-                  ),
 
-                  SizedBox(
-                    height: 20,
-                  ),
 
-                  ElevatedButton(
-                      onPressed: (){
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => ChatPage(name: "ahmet"))
-                        );
-                      },
-                      child: Container(
-                          height: 90,
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 16,
-                                backgroundImage: NetworkImage("https://images.pexels.com/photos/36423205/pexels-photo-36423205.jpeg"),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text("data",style: TextStyle(fontSize: 25),)
-                            ],
-                          )
-                      )
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
+
+                  //BURASI SADECE SETSTATE İÇİN DENEME ÖĞRENME YERİ
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: _butonRengi,

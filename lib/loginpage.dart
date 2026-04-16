@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/legacy.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-final ad = StateProvider<String>((ref){return "username";});
+import 'package:instagram_demo/provider.dart';
+import 'package:instagram_demo/common_widgets/customtextfformfield.dart';
+import 'common_widgets/profile_photo.dart';
 
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -44,162 +44,145 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         child: SingleChildScrollView(
           child: Form(
             key: _formKey, // Formumuzu anahtara bağlıyoruz
-            child: Column(
-              children: [
+            child: Container(
+              color: Colors.tealAccent,
+              child: Column(
+                children: [
 
-                Container(
-                  color: Colors.tealAccent,
-                  child: Column(
+                  SizedBox(height: 20,),
+
+                  ProfileStack(),
+
+                  const SizedBox(height: 40),
+
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
+
+                    child: CustomTextFormField(
+                        controller: _emailController,
+                        keyboardType: TextInputType.emailAddress,
+                        obscureText: false,
+                        label: "E-mail",
+                        prefixicon: Icons.mail,
+                        validator: (value){
+                          if(value == null || value.isEmpty){
+                            return "E-Mail boş bırakılamaz";
+                          }
+                          if (!value.contains("@")){
+                            return "Geçersiz E-Mail";
+                          }
+                          return null;
+                        },
+                    ),
+
+                      //Usttekinin altta formal kullanımı
+                    /*TextFormField(
+                      controller: _emailController,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.email),
+                          labelText: "E-Mail",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)
+                          )
+                      ),
+                      validator: (value){
+                        if(value == null || value.isEmpty){
+                          return "E-Mail boş bırakılamaz";
+                        }
+                        if (!value.contains("@")){
+                          return "Geçersiz E-Mail";
+                        }
+                        return null;
+                      },
+                    ),*/
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 40),
+                    child: TextFormField(
+                      controller: _passwordController,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.lock),
+                          labelText: "Password",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)
+                          )
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Şifre boş bırakılamaz";
+                        }
+                        if (value.length < 6 ){
+                          return "şifre 6 haneden az olamaz";
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  const SizedBox(height: 40),
+
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.purple,
+                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                      ),
+                      onPressed: () {
+
+                        if (_formKey.currentState!.validate()){
+                          // İŞTE VERİLERİ BURADAN ALIP VERİTABANINA GÖNDERECEKSİN
+                          String email = _emailController.text;
+                          String password = _passwordController.text;
+
+                          // Şimdilik test için konsola yazdırıyoruz
+                          print("Veritabanına gönderilecek Email: $email");
+                          print("Veritabanına gönderilecek Şifre: $password");
+
+                          String extractedName= email.split("@").first;
+                          if (extractedName.trim().length<3){
+                            extractedName = "username";
+                          }
+                          ref.read(ad.notifier).state = extractedName;
+
+                          context.go("/homepage");
+                        }
+                      },
+                      child: Text("Giriş Yap", style: TextStyle(color: Colors.white, fontSize: 16))
+                  ),
+
+                  const SizedBox(height: 40),
+
+
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-
-                      SizedBox(height: 20,),
-
-                      Stack(
-                        children: [
-                          CircleAvatar(
-                            radius: 60,
-                            backgroundColor: Colors.grey,
-                            child: Icon(
-                              Icons.person,
-                              size: 60,
-                              color: Colors.blueAccent,
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.black38,
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: Colors.green,
-                                    width: 2,
-                                  )
-                              ),
-                              child: IconButton(
-                                  onPressed: (){
-                                    print("kameraya tıklandı");
-                                  },
-                                  icon: Icon(Icons.camera_alt, color: Colors.purpleAccent, size: 20,)
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 40),
-
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                        child: TextFormField(
-                          controller: _emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.email),
-                              labelText: "E-Mail",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)
-                              )
-                          ),
-                          validator: (value){
-                            if(value == null || value.isEmpty){
-                              return "E-Mail boş bırakılamaz";
-                            }
-                            if (!value.contains("@")){
-                              return "Geçersiz E-Mail";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 40), // İki kutucuk arasına boşluk
-
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
-                        child: TextFormField(
-                          controller: _passwordController,
-                          obscureText: true,
-                          decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.lock),
-                              labelText: "Password",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10)
-                              )
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return "Şifre boş bırakılamaz";
-                            }
-                            if (value.length < 6 ){
-                              return "şifre 6 haneden az olamaz";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-
-                      const SizedBox(height: 40),
-
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.purple,
-                          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                        ),
-                          onPressed: () {
-
-                            if (_formKey.currentState!.validate()){
-                              // İŞTE VERİLERİ BURADAN ALIP VERİTABANINA GÖNDERECEKSİN
-                              String email = _emailController.text;
-                              String password = _passwordController.text;
-
-                              // Şimdilik test için konsola yazdırıyoruz
-                              print("Veritabanına gönderilecek Email: $email");
-                              print("Veritabanına gönderilecek Şifre: $password");
-
-                              String extractedName= email.split("@").first;
-                              if (extractedName.trim().length<3){
-                                extractedName = "username";
-                              }
-                              ref.read(ad.notifier).state = extractedName;
-
-                              context.go("/homepage");
-                            }
-                          },
-                          child: Text("Giriş Yap", style: TextStyle(color: Colors.white, fontSize: 16))
-                      ),
-
-                      const SizedBox(height: 40),
-
-
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text("Hesabın yok mu?"),
-                          TextButton(
-                              onPressed: (){
-                                /*Navigator.push(
+                      Text("Hesabın yok mu?"),
+                      TextButton(
+                        onPressed: (){
+                          /*Navigator.push(
                                   context,
                                   MaterialPageRoute(builder: (context) => SignUpPage())
                                 );*/
-                                context.push("/signuppage");
-                              },
-                              child: Text(
-                                "Kayıt Ol!",
-                                style: TextStyle(
-                                    color: Colors.black38,
-                                    fontWeight: FontWeight.bold
-                                ),
-                              ),
-                          )
-                        ],
+                          context.push("/signuppage");
+                        },
+                        child: Text(
+                          "Kayıt Ol!",
+                          style: TextStyle(
+                              color: Colors.black38,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
                       )
                     ],
-                  ),
-                )
-              ],
-            ),
+                  )
+                ],
+              ),
+            )
           ),
         ),
       ),

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
-
-import 'loginpage.dart';
-
+import 'package:instagram_demo/provider.dart';
 
 class ChatPage extends StatelessWidget {
   final String name;

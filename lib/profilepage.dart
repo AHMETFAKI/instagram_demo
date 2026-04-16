@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
-import 'package:instagram_demo/loginpage.dart';
+import 'package:instagram_demo/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});

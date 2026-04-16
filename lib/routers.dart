@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:instagram_demo/signuppage.dart';
-import 'main.dart';
 import 'loginpage.dart';
 import 'chatpage.dart';
 import 'homepage.dart';

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
+import 'package:instagram_demo/provider.dart';
+import 'common_widgets/profile_photo.dart';
 import 'reelspage.dart';
 import 'messagepage.dart';
 import 'searchpage.dart';
 import 'profilepage.dart';
 import 'mainpage.dart';
 
-final bottomNavProvider = StateProvider<int>((ref) => 0);
+
 
 
 class MyHomePage extends ConsumerWidget {
@@ -52,7 +53,7 @@ class MyHomePage extends ConsumerWidget {
           BottomNavigationBarItem(icon: Icon(Icons.video_chat_sharp), label: "Reels"),
           BottomNavigationBarItem(icon: Icon(Icons.message), label: "Mesajlar"),
           BottomNavigationBarItem(icon: Icon(Icons.search), label: "Ara"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profil"),
+          BottomNavigationBarItem(icon: ProfilePhoto()),
         ],
       ),
     );
